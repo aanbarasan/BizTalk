@@ -4,16 +4,21 @@ $(document).ready(function() {
 
 function loadDatePiker() {
 	var options = {};
-	$("#dateRange").daterangepicker(options, function(start, end, label) {
-		loadData(start, end);
+	$("#dateRange").daterangepicker(options);
+	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
+		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
 	});
 }
 
 function loadData(start, end) {
-	var data = {};
+	var data = {
+		"start" : start,
+		"end" : end
+	};
 	$.ajax({
 		method : "POST",
 		url : "/api/search",
+		contentType: "application/json",
 		data : {
 			"data" : data
 		}
@@ -28,12 +33,10 @@ function loadChart() {
 			type : 'column'
 		},
 		title : {
-			text : 'Biz data stats'
+			text : ''
 		},
 		xAxis : {
-			title : {
-				text : ''
-			},
+			categories: [ "No of vehicle information", "No of unique vehicles", "No of suspened vehicles"],
 			tickInterval : 1
 		},
 		yAxis : {
@@ -44,21 +47,12 @@ function loadChart() {
 		},
 		series : [ {
 			name : 'Biz data stats',
-			data : [ {
-				"name" : "No of vehicle information",
-				"y" : 34
-			}, {
-				"name" : "No of unique vehicles",
-				"y" : 20
-			}, {
-				"name" : "No of suspened vehicles",
-				"y" : 5
-			} ]
+			data : [34, 20, 5]
 		} ],
 		tooltip : {
 			formatter : function() {
 				return '<b>' + this.series.name + '</b><br/>' + this.point.y
-						+ ' ' + this.point.name;
+						+ ' ' + this.x;
 			}
 		}
 	});
