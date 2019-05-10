@@ -2,18 +2,19 @@ package com.steria.BizTalk.RestContoller;
 
 import java.util.HashMap;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ApiController {
 
 	@RequestMapping(value = "/api/search", method = RequestMethod.POST)
-	public HashMap<String, Integer> search(@RequestParam(value = "data", required = false) Object data ) {
+	public HashMap<String, Integer> search(@RequestBody HashMap<Object, Object >data) {
 
-		System.out.println(data);
+		String start = data.get("start").toString();
+		String end = data.get("end").toString();
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("total", 34);
 		map.put("unique", 20);

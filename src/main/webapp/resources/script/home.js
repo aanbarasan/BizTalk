@@ -11,17 +11,16 @@ function loadDatePiker() {
 }
 
 function loadData(start, end) {
-	var data = {
+	var postData = {
 		"start" : start,
 		"end" : end
 	};
 	$.ajax({
 		method : "POST",
 		url : "/api/search",
+		dataType: "json",
 		contentType: "application/json",
-		data : {
-			"data" : data
-		}
+		data: JSON.stringify(postData),
 	}).done(function(data) {
 		var chartData = {"x":[ "No of vehicle information", "No of unique vehicles", "No of suspended vehicles"], y:[data.total, data.unique, data.suspended]};
 		$("#searchDetailsContainer").show();
