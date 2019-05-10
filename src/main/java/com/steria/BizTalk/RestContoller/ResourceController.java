@@ -9,8 +9,7 @@ public class ResourceController {
 
 	@RequestMapping(value = "/")
 	public ModelAndView resource() {
-		
+
 		return new ModelAndView("home");
 	}
-
 }
