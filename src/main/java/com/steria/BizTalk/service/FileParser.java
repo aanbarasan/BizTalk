@@ -39,7 +39,7 @@ public class FileParser {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		Document document = builder.parse(stream);
-
+System.out.println("Hello");
 		NodeList journey = document.getElementsByTagName("journey");
 		for (int i = 0; i < journey.getLength(); i++) {
 			Node element = journey.item(i);
