@@ -20,6 +20,7 @@ function loadChart() {
 			text : 'Biz data stats'
 		},
 		xAxis: {
+			categories: ['No of vehicle information', 'No of unique vehicles', 'No of suspened vehicles'],
             title: {
                 text: ''
             },
@@ -33,12 +34,12 @@ function loadChart() {
 		},
 		series: [{
             name: 'Biz data stats',
-            data: [{"name":"No of vehicle information", "y":34}, {"name":"No of unique vehicles", "y":20}, {"name":"No of suspened vehicles", "y":5}]
+            data: [34, 20, 5]
         }],
 		tooltip : {
 			formatter : function() {
 				return '<b>' + this.series.name + '</b><br/>' + this.point.y
-						+ ' ' + this.point.name;
+						+ ' ' + this.x;
 			}
 		}
 	});
