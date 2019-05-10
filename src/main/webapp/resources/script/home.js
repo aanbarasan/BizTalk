@@ -7,7 +7,7 @@ function loadDatePiker() {
 	$("#dateRange").daterangepicker(options);
 	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
 		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
-	});
+	}).click();
 }
 
 function loadData(start, end) {
@@ -23,11 +23,20 @@ function loadData(start, end) {
 			"data" : data
 		}
 	}).done(function(data) {
-		loadChart(data);
+		var chartData = {"x":[ "No of vehicle information", "No of unique vehicles", "No of suspended vehicles"], y:[data.total, data.unique, data.suspended]};
+		$("#searchDetailsContainer").show();
+		loadChart(chartData);
+		loadTable(data);
 	});
 }
 
-function loadChart() {
+function loadTable(data){
+	$("#vehicleTotal").html(data.total);
+	$("#vehicleUnique").html(data.unique);
+	$("#vehicleSuspended").html(data.suspended);
+}
+
+function loadChart(chartData) {
 	Highcharts.chart('chart', {
 		chart : {
 			type : 'column'
@@ -36,7 +45,7 @@ function loadChart() {
 			text : ''
 		},
 		xAxis : {
-			categories: [ "No of vehicle information", "No of unique vehicles", "No of suspened vehicles"],
+			categories: chartData.x,
 			tickInterval : 1
 		},
 		yAxis : {
@@ -47,7 +56,7 @@ function loadChart() {
 		},
 		series : [ {
 			name : 'Biz data stats',
-			data : [34, 20, 5]
+			data : chartData.y
 		} ],
 		tooltip : {
 			formatter : function() {

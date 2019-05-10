@@ -16,8 +16,8 @@ public class ApiController {
 		System.out.println(data);
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("total", 34);
-		map.put("unique", 34);
-		map.put("suspended", 34);
+		map.put("unique", 20);
+		map.put("suspended", 5);
 		return map;
 	}
 }
