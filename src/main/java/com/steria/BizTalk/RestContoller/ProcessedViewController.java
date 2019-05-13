@@ -24,11 +24,6 @@ public class ProcessedViewController {
 		String end = data.get("end").toString();
 
 		HashMap<String, Integer> map = (HashMap<String, Integer>) tripviewServices.processedViewTrip(start, end);
-
-		Map<String, Integer> maps = new HashMap<>();
-		maps.put("total", 34);
-		maps.put("unique", 20);
-		maps.put("suspended", 5);
 		return map;
 	}
 }

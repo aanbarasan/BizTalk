@@ -17,7 +17,7 @@ function loadData(start, end) {
 	};
 	$.ajax({
 		method : "POST",
-		url : "/api/search",
+		url : "/api/processview",
 		dataType: "json",
 		contentType: "application/json",
 		data: JSON.stringify(postData),

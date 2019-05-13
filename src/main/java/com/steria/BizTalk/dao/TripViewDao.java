@@ -30,7 +30,6 @@ public class TripViewDao {
 				.find(Query.query(Criteria.where("journeyStart").gte(startDate).lte(endDate)), SiteInformation.class);
 
 		return siteList;
-
 	}
 
 }
