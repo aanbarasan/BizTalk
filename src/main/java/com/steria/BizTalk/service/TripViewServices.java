@@ -28,18 +28,18 @@ public class TripViewServices {
 	public Map<String, Integer> processedViewTrip(String startDate, String endDate) {
 
 		Map<String, Integer> resultMap = new HashMap<>();
-		Set<String> journeyIdSet = new HashSet<>();
+		Set<String> routeIdSet = new HashSet<>();
 		Set<String> vehicleSet = new HashSet<>();
 		int suspendedVehicles = 0;
 
 		List<SiteInformation> informationList = tripviewDao.ptocessedTripView(startDate, endDate);
-
-		for (int i = 0; i < informationList.size(); i++) {
-			journeyIdSet.add(informationList.get(i).getJourneyAlias());
-			vehicleSet.add(informationList.get(i).getVehicle());
+		
+		for(SiteInformation sitInfo : informationList){
+			routeIdSet.add(sitInfo.getRouteId());
+			vehicleSet.add(sitInfo.getVehicle());
 		}
-
-		resultMap.put("total", journeyIdSet.size());
+		
+		resultMap.put("total", routeIdSet.size());
 		resultMap.put("unique", vehicleSet.size());
 		resultMap.put("suspended", suspendedVehicles);
 
