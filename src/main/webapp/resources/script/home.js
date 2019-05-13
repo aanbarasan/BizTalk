@@ -4,6 +4,9 @@ $(document).ready(function() {
 
 function loadDatePiker() {
 	var options = {};
+	var dt = new Date();
+	options.startDate = new Date(dt.getTime() - (86400000 * 7));
+	options.endDate = new Date(dt.getTime() + (86400000 * 7));
 	$("#dateRange").daterangepicker(options);
 	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
 		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
