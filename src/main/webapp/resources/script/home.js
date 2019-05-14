@@ -7,18 +7,18 @@ function loadDatePiker() {
 	var dt = new Date();
 	options.startDate = new Date(dt.getTime() - (86400000 * 7));
 	options.endDate = new Date(dt.getTime() + (86400000 * 7));
-	options.timePicker = true;
-	options.timePicker24Hour = true;
+//	options.timePicker = true;
+//	options.timePicker24Hour = true;
 	$("#dateRange").daterangepicker(options);
 	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-		loadData(picker.startDate.format('YYYY-MM-DDThh:mm:ss'), picker.endDate.format('YYYY-MM-DDThh:mm:ss'));
+		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD')); // Thh:mm:ss
 	}).click();
 }
 
 function loadData(start, end) {
 	var postData = {
-		"start" : start,
-		"end" : end
+		"start" : start + "T00:00:000",
+		"end" : end + "T23:59:999"
 	};
 	$.ajax({
 		method : "POST",
