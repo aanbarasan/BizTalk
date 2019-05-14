@@ -43,36 +43,37 @@ public class TripReadService {
 			if (files.length > 0) {
 
 				for (File file : files) {
+					if (file.length() != 0) {
+						Document doc = dBuilder.parse(file);
 
-					Document doc = dBuilder.parse(file);
+						doc.getDocumentElement().normalize();
 
-					doc.getDocumentElement().normalize();
+						System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+						NodeList nList = doc.getElementsByTagName("journey");
 
-					System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-					NodeList nList = doc.getElementsByTagName("journey");
+						for (int temp = 0; temp < nList.getLength(); temp++) {
 
-					for (int temp = 0; temp < nList.getLength(); temp++) {
+							Node nNode = nList.item(temp);
+							Element eElement = (Element) nNode;
 
-						Node nNode = nList.item(temp);
-						Element eElement = (Element) nNode;
+							System.out.println(nNode.getNodeType());
 
-						System.out.println(nNode.getNodeType());
+							NodeList siteList = eElement.getElementsByTagName("site");
 
-						NodeList siteList = eElement.getElementsByTagName("site");
+							for (int j = 0; j < siteList.getLength(); j++) {
+								Node siteNode = siteList.item(j);
+								Element siteElement = (Element) siteNode;
+								sitelist.add(setValueToPojo(eElement, siteElement, siteInformation));
+								routeId = siteInformation.getRouteId();
+								siteInformation = new SiteInformation();
+							}
 
-						for (int j = 0; j < siteList.getLength(); j++) {
-							Node siteNode = siteList.item(j);
-							Element siteElement = (Element) siteNode;
-							sitelist.add(setValueToPojo(eElement, siteElement, siteInformation));
-							routeId = siteInformation.getRouteId();
-							siteInformation = new SiteInformation();
 						}
+						System.out.println(sitelist.size() + "RouteID->" + routeId);
 
+						trackingDao.addSiteInfo(sitelist, routeId);
 					}
-					System.out.println(sitelist.size() + "RouteID->" + routeId);
 				}
-				trackingDao.addSiteInfo(sitelist, routeId);
-
 			}
 
 		} catch (Exception ex) {
@@ -83,10 +84,16 @@ public class TripReadService {
 
 	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation) {
 
-		siteInformation.setRouteId(eElement.getElementsByTagName("routeId").item(0).getTextContent());
-		siteInformation.setJourneyAlias(eElement.getElementsByTagName("journeyAlias").item(0).getTextContent());
+		siteInformation.setRouteId(eElement.getElementsByTagName("routeId").item(0) != null
+				? eElement.getElementsByTagName("routeId").item(0).getTextContent() : null);
+
+		siteInformation.setJourneyAlias(eElement.getElementsByTagName("journeyAlias").item(0) != null
+				? eElement.getElementsByTagName("journeyAlias").item(0).getTextContent() : null);
+
 		siteInformation.setJourneyStart(eElement.getElementsByTagName("journeyStart").item(0).getTextContent());
-		siteInformation.setPlannedDistance(eElement.getElementsByTagName("plannedDistance").item(0).getTextContent());
+
+		siteInformation.setPlannedDistance(eElement.getElementsByTagName("plannedDistance").item(0) != null
+				? eElement.getElementsByTagName("plannedDistance").item(0).getTextContent() : null);
 
 		if (!StringUtils.isEmpty(siteElement.getAttribute("id"))) {
 			siteInformation.setSite(siteElement.getAttribute("id"));
@@ -108,16 +115,30 @@ public class TripReadService {
 			System.out.println("type: " + resourceElement.getAttribute("type"));
 		}
 
-		siteInformation.setPta(siteElement.getElementsByTagName("pta").item(0).getTextContent());
-		siteInformation.setPtd(siteElement.getElementsByTagName("ptd").item(0).getTextContent());
-		siteInformation.setCallSequence(siteElement.getElementsByTagName("callSequence").item(0).getTextContent());
-		siteInformation.setSiteName(siteElement.getElementsByTagName("siteName").item(0).getTextContent());
-		siteInformation.setSiteCategory(siteElement.getElementsByTagName("siteCategory").item(0).getTextContent());
-		siteInformation.setSiteAddress1(siteElement.getElementsByTagName("siteAddress1").item(0).getTextContent());
-		siteInformation.setSiteCity(siteElement.getElementsByTagName("siteCity").item(0).getTextContent());
-		siteInformation.setSitePostCode(siteElement.getElementsByTagName("sitePostCode").item(0).getTextContent());
-		siteInformation.setLatitude(siteElement.getElementsByTagName("latitude").item(0).getTextContent());
-		siteInformation.setLongitude(siteElement.getElementsByTagName("longitude").item(0).getTextContent());
+		siteInformation.setPta(siteElement.getElementsByTagName("pta").item(0) != null
+				? siteElement.getElementsByTagName("pta").item(0).getTextContent() : null);
+		siteInformation.setPtd(siteElement.getElementsByTagName("ptd").item(0) != null
+				? siteElement.getElementsByTagName("ptd").item(0).getTextContent() : null);
+		siteInformation.setCallSequence(siteElement.getElementsByTagName("callSequence").item(0) != null
+				? siteElement.getElementsByTagName("callSequence").item(0).getTextContent() : null);
+		siteInformation.setSiteName(siteElement.getElementsByTagName("siteName").item(0) != null
+				? siteElement.getElementsByTagName("siteName").item(0).getTextContent() : null);
+
+		siteInformation.setSiteCategory(siteElement.getElementsByTagName("siteCategory").item(0) != null
+				? siteElement.getElementsByTagName("siteCategory").item(0).getTextContent() : null);
+
+		siteInformation.setSiteAddress1(siteElement.getElementsByTagName("siteAddress1").item(0) != null
+				? siteElement.getElementsByTagName("siteAddress1").item(0).getTextContent() : null);
+
+		siteInformation.setSiteCity(siteElement.getElementsByTagName("siteCity").item(0) != null
+				? siteElement.getElementsByTagName("siteCity").item(0).getTextContent() : null);
+
+		siteInformation.setSitePostCode(siteElement.getElementsByTagName("sitePostCode").item(0) != null
+				? siteElement.getElementsByTagName("sitePostCode").item(0).getTextContent() : null);
+		siteInformation.setLatitude(siteElement.getElementsByTagName("latitude").item(0) != null
+				? siteElement.getElementsByTagName("latitude").item(0).getTextContent() : null);
+		siteInformation.setLongitude(siteElement.getElementsByTagName("longitude").item(0) != null
+				? siteElement.getElementsByTagName("longitude").item(0).getTextContent() : null);
 
 		return siteInformation;
 
