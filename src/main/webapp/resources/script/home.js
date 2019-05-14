@@ -7,9 +7,11 @@ function loadDatePiker() {
 	var dt = new Date();
 	options.startDate = new Date(dt.getTime() - (86400000 * 7));
 	options.endDate = new Date(dt.getTime() + (86400000 * 7));
+	options.timePicker = true;
+	options.timePicker24Hour = true;
 	$("#dateRange").daterangepicker(options);
 	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
+		loadData(picker.startDate.format('YYYY-MM-DDThh:mm:ss'), picker.endDate.format('YYYY-MM-DDThh:mm:ss'));
 	}).click();
 }
 

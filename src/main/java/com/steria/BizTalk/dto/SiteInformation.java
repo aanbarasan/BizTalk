@@ -1,5 +1,7 @@
 package com.steria.BizTalk.dto;
 
+import java.util.Date;
+
 /**
  * @author ndevados
  *
@@ -8,7 +10,7 @@ public class SiteInformation {
 
 	private String routeId;
 	private String journeyAlias;
-	private String journeyStart;
+	private Date journeyStart;
 	private String plannedDistance;
 	private String resourceDriver;
 	private String vehicle;
@@ -57,7 +59,7 @@ public class SiteInformation {
 	/**
 	 * @return the journeyStart
 	 */
-	public String getJourneyStart() {
+	public Date getJourneyStart() {
 		return journeyStart;
 	}
 
@@ -65,7 +67,7 @@ public class SiteInformation {
 	 * @param journeyStart
 	 *            the journeyStart to set
 	 */
-	public void setJourneyStart(String journeyStart) {
+	public void setJourneyStart(Date journeyStart) {
 		this.journeyStart = journeyStart;
 	}
 

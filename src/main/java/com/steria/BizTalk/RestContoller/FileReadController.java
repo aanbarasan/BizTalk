@@ -21,12 +21,11 @@ public class FileReadController {
 	TripReadService tripReadObj;
 
 	@RequestMapping("/readFiles")
-	public void readefile() {
-
-		// String path = "D:/Nanda/TransportTescoProject/xmlFiles";
+	public String readefile() {
 
 		tripReadObj.readFiles(processedDirPath);
-
+		
+		return "Finished";
 	}
 
 }

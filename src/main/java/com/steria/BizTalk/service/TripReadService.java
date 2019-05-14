@@ -1,7 +1,10 @@
 package com.steria.BizTalk.service;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -10,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -82,15 +86,18 @@ public class TripReadService {
 
 	}
 
-	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation) {
+	@SuppressWarnings("deprecation")
+	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation) throws DOMException, ParseException {
 
 		siteInformation.setRouteId(eElement.getElementsByTagName("routeId").item(0) != null
 				? eElement.getElementsByTagName("routeId").item(0).getTextContent() : null);
 
 		siteInformation.setJourneyAlias(eElement.getElementsByTagName("journeyAlias").item(0) != null
 				? eElement.getElementsByTagName("journeyAlias").item(0).getTextContent() : null);
-
-		siteInformation.setJourneyStart(eElement.getElementsByTagName("journeyStart").item(0).getTextContent());
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		
+		siteInformation.setJourneyStart(format.parse(eElement.getElementsByTagName("journeyStart").item(0).getTextContent()));
 
 		siteInformation.setPlannedDistance(eElement.getElementsByTagName("plannedDistance").item(0) != null
 				? eElement.getElementsByTagName("plannedDistance").item(0).getTextContent() : null);

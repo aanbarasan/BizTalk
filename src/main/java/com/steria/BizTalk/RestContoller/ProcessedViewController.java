@@ -1,5 +1,6 @@
 package com.steria.BizTalk.RestContoller;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class ProcessedViewController {
 	TripViewServices tripviewServices;
 
 	@RequestMapping(value = "/api/processview", method = RequestMethod.POST)
-	public HashMap<String, Integer> search(@RequestBody HashMap<Object, Object> data) {
+	public HashMap<String, Integer> search(@RequestBody HashMap<Object, Object> data) throws ParseException {
 
 		String start = data.get("start").toString();
 		String end = data.get("end").toString();

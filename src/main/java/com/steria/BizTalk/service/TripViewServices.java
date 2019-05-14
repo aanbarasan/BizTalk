@@ -3,6 +3,7 @@
  */
 package com.steria.BizTalk.service;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class TripViewServices {
 	@Autowired
 	TripViewDao tripviewDao;
 
-	public Map<String, Integer> processedViewTrip(String startDate, String endDate) {
+	public Map<String, Integer> processedViewTrip(String startDate, String endDate) throws ParseException {
 
 		Map<String, Integer> resultMap = new HashMap<>();
 		Set<String> routeIdSet = new HashSet<>();
