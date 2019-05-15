@@ -21,6 +21,8 @@
 	type="text/javascript"></script>
 <script src="/resources/plugins/highcharts/highcharts.js"
 	type="text/javascript"></script>
+<script src="/resources/plugins/highcharts/highcharts-3d.js"
+	type="text/javascript"></script>
 <script src="/resources/script/home.js" type="text/javascript"></script>
 </head>
 <body style="background-color: #f3f3f3;">
@@ -59,7 +61,7 @@
 			</div>
 			<div class="col-md-6">
 				<h5 style="text-align: center;">This section will produce graph based on the vehicle counts</h5>
-				<div id="chart" style="border: 1px solid #ccd6eb;"></div>
+				<div id="chart" style="border: 1px solid #ccd6eb;" ondblclick="toggleChartGraphics()"></div>
 			</div>
 		</div>
 	</div>

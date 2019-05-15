@@ -33,7 +33,7 @@ public class TripReadService {
 	TrackingDAO trackingDao;
 
 	public void readFiles(String inpath) {
-
+		System.out.println("Parsing started: " + new Date().toString());
 		List<SiteInformation> sitelist = new ArrayList<>();
 		SiteInformation siteInformation = new SiteInformation();
 		String routeId = null;
@@ -52,15 +52,12 @@ public class TripReadService {
 
 						doc.getDocumentElement().normalize();
 
-						System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 						NodeList nList = doc.getElementsByTagName("journey");
 
 						for (int temp = 0; temp < nList.getLength(); temp++) {
 
 							Node nNode = nList.item(temp);
 							Element eElement = (Element) nNode;
-
-							System.out.println(nNode.getNodeType());
 
 							NodeList siteList = eElement.getElementsByTagName("site");
 
@@ -73,7 +70,6 @@ public class TripReadService {
 							}
 
 						}
-						System.out.println(sitelist.size() + "RouteID->" + routeId);
 
 						trackingDao.addSiteInfo(sitelist, routeId);
 					}
@@ -83,6 +79,7 @@ public class TripReadService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		System.out.println("Parsing end: " + new Date().toString());
 
 	}
 
@@ -118,8 +115,6 @@ public class TripReadService {
 			} else {
 				System.out.println("SiteId" + resourceElement.getAttribute("id"));
 			}
-			System.out.println("Id" + resourceElement.getAttribute("id"));
-			System.out.println("type: " + resourceElement.getAttribute("type"));
 		}
 
 		siteInformation.setPta(siteElement.getElementsByTagName("pta").item(0) != null
