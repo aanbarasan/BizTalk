@@ -9,6 +9,8 @@
 	href="/resources/plugins/boostrap-4.0.0/bootstrap.css" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/plugins/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet"
+	href="/resources/plugins/fontawesome_5.8.2/all/all.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/stylesheet/home.css" />
 <script src="/resources/plugins/jquery/jquery.min.js"
@@ -27,43 +29,84 @@
 	type="text/javascript"></script>
 <script src="/resources/script/home.js" type="text/javascript"></script>
 </head>
-<body style="background-color: #f3f3f3;">
-	<div style="padding: 40px;">
-		<div class="col-md-12">
-			<h4>
-				Please enter the start date and end date: <input type="text"
-					id="dateRange" class="form-control"
-					style="display: inline; width: 220px;">
-			</h4>
+<body>
+	<div class="pageSlider hideSlider">
+		<div style="padding: 10px 20px;">
+			<div onclick="togglePageSlider('hide')"
+				style="font-size: 21px; display: inline-block; padding: 0px 10px; cursor: pointer;">
+				<i class="fas fa-bars"></i>
+			</div>
 		</div>
-		<div class="row col-md-12" id="searchDetailsContainer"
-			style="display: none; padding: 15px;">
-			<div class="row col-md-6" style="padding: 40px 10px;">
-				<div class="col-md-4 nopadding">
-					<div class="col-md-12 vehicleTableHeader">No of vehicle
-						information passed from BizTalk to Microlise</div>
-					<div class="col-md-12 vehicleTableBody">
-						<span id="vehicleTotal"></span>
-					</div>
+		<div style="padding: 10px 20px;">
+			<div class="sliderMenuList">
+				<a href="/">Home</a>
+			</div>
+			<div class="sliderMenuList">
+				<a href="/">Contact US</a>
+			</div>
+			<div class="sliderMenuList">
+				<a href="/">About</a>
+			</div>
+		</div>
+	</div>
+	<div class="pageContent">
+		<div class="pageHeader">
+			<div onclick="togglePageSlider('show')"
+				style="font-size: 21px; display: inline-block; padding: 0px 10px; cursor: pointer;">
+				<i class="fas fa-bars"></i>
+			</div>
+			<div
+				style="font-size: 21px; display: inline-block; padding: 0px 5px;">BizTalk
+				vehicle stats</div>
+		</div>
+		<div class="pageBody">
+			<div style="padding: 30px;">
+				<div class="col-md-12 nopadding">
+					<h5 style="margin: 0px;">
+						Please enter the start date and end date: <input type="text"
+							id="dateRange" class="form-control"
+							style="display: inline; width: 220px;">
+					</h5>
 				</div>
-				<div class="col-md-4 nopadding">
-					<div class="col-md-12 vehicleTableHeader">No of unique
-						vehicles passed from BizTalk to Microlise</div>
-					<div class="col-md-12 vehicleTableBody">
-						<span id="vehicleUnique"></span>
+				<div class="row col-md-12" id="searchDetailsContainer"
+					style="display: none; padding: 0px 15px;">
+					<div class="row col-md-6" style="padding: 33px 15px;">
+						<div class="col-md-4 nopadding">
+							<div class="col-md-12 vehicleTableHeader">No of vehicle
+								information passed from BizTalk to Microlise</div>
+							<div class="col-md-12 vehicleTableBody">
+								<span id="vehicleTotal"></span>
+							</div>
+						</div>
+						<div class="col-md-4 nopadding">
+							<div class="col-md-12 vehicleTableHeader">No of unique
+								vehicles passed from BizTalk to Microlise</div>
+							<div class="col-md-12 vehicleTableBody">
+								<span id="vehicleUnique"></span>
+							</div>
+						</div>
+						<div class="col-md-4 nopadding">
+							<div class="col-md-12 vehicleTableHeader">No of vehicle
+								details suspended at BizTalk</div>
+							<div class="col-md-12 vehicleTableBody">
+								<span id="vehicleSuspended"></span>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 nopadding">
-					<div class="col-md-12 vehicleTableHeader">No of vehicle
-						details suspended at BizTalk</div>
-					<div class="col-md-12 vehicleTableBody">
-						<span id="vehicleSuspended"></span>
+					<div class="col-md-6">
+						<h5 style="text-align: center;">This section will produce
+							graph based on the vehicle counts</h5>
+						<div id="chart" style="border: 1px solid #ccd6eb;"
+							ondblclick="toggleChartGraphics()"></div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<h5 style="text-align: center;">This section will produce graph based on the vehicle counts</h5>
-				<div id="chart" style="border: 1px solid #ccd6eb;" ondblclick="toggleChartGraphics()"></div>
+		</div>
+		<div class="pageFooter">
+			<div>
+				Copyright © 2019 Sopra Steria Inc. All rights reserved. <span
+					style="text-decoration: underline; cursor: pointer;">Terms
+					of use</span>
 			</div>
 		</div>
 	</div>

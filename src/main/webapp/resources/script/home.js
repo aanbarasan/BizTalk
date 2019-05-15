@@ -4,6 +4,16 @@ $(document).ready(function() {
 	loadDatePiker();
 });
 
+function togglePageSlider(action){
+	if(action == 'show'){
+		$(".pageSlider").removeClass("hideSlider");
+	}
+	else if(action == 'hide'){
+		$(".pageSlider").addClass("hideSlider");
+	}
+	
+}
+
 function loadDatePiker() {
 	var options = {};
 	var dt = new Date();
@@ -15,6 +25,9 @@ function loadDatePiker() {
 	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
 		loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD')); // Thh:mm:ss
 	});
+	
+	$(".daterangepicker .applyBtn").prop("disabled", false);
+	$(".daterangepicker .applyBtn").click();
 }
 
 function loadData(start, end) {
@@ -42,7 +55,8 @@ function loadTable(data){
 	$("#vehicleSuspended").html(data.suspended);
 }
 
-let viewChart, chartGraphicsComponent;
+let viewChart;
+let chartGraphicsComponent = {betaMin: -20, betaMax: 20, betaCur: -10, betaDirectionInc: true, betaIncVal:0.5, timeout: 50};
 function loadChart(chartData) {
 	Math.easeOutBounce = function (pos) {
 	    if ((pos) < (1 / 2.75)) {
@@ -63,7 +77,7 @@ function loadChart(chartData) {
 	        options3d: {
 	            enabled: true,
 	            alpha: 0,
-	            beta: -10,
+	            beta: chartGraphicsComponent.betaCur,
 	            depth: 70,
 	            viewDistance: 25
 	        }
@@ -100,7 +114,6 @@ function loadChart(chartData) {
 	        enabled: true
 	    }
 	});
-	chartGraphicsComponent = {betaMin: -20, betaMax: 20, betaCur: -10, betaDirectionInc: true, betaIncVal:0.5, timeout: 50,};
 }
 
 let chartRotate = false, graphicsTimeout;
