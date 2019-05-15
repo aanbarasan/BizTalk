@@ -44,6 +44,19 @@ function loadTable(data){
 
 let viewChart, chartGraphicsComponent;
 function loadChart(chartData) {
+	Math.easeOutBounce = function (pos) {
+	    if ((pos) < (1 / 2.75)) {
+	        return (7.5625 * pos * pos);
+	    }
+	    if (pos < (2 / 2.75)) {
+	        return (7.5625 * (pos -= (1.5 / 2.75)) * pos + 0.75);
+	    }
+	    if (pos < (2.5 / 2.75)) {
+	        return (7.5625 * (pos -= (2.25 / 2.75)) * pos + 0.9375);
+	    }
+	    return (7.5625 * (pos -= (2.625 / 2.75)) * pos + 0.984375);
+	};
+	
 	viewChart = Highcharts.chart('chart', {
 		chart : {
 			type : 'column',
@@ -70,14 +83,22 @@ function loadChart(chartData) {
 		},
 		series : [ {
 			name : 'Biz data stats',
-			data : chartData.y
+			data : chartData.y,
+			animation: {
+	            duration: 2000,
+	            // Uses Math.easeOutBounce
+	            easing: 'easeOutBounce'
+	        }
 		} ],
 		tooltip : {
 			formatter : function() {
 				return '<b>' + this.series.name + '</b><br/>' + this.point.y
 						+ ' ' + this.x;
 			}
-		}
+		},
+	    exporting: {
+	        enabled: true
+	    }
 	});
 	chartGraphicsComponent = {betaMin: -20, betaMax: 20, betaCur: -10, betaDirectionInc: true, betaIncVal:0.5, timeout: 50,};
 }

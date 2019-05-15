@@ -23,6 +23,8 @@
 	type="text/javascript"></script>
 <script src="/resources/plugins/highcharts/highcharts-3d.js"
 	type="text/javascript"></script>
+<script src="/resources/plugins/highcharts/exporting.js"
+	type="text/javascript"></script>
 <script src="/resources/script/home.js" type="text/javascript"></script>
 </head>
 <body style="background-color: #f3f3f3;">
