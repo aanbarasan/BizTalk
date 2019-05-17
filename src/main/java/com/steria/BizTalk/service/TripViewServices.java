@@ -26,13 +26,13 @@ public class TripViewServices {
 	@Autowired
 	TripViewDao tripviewDao;
 
-	public Map<String, Integer> processedViewTrip(String startDate, String endDate) throws ParseException {
+	public Map<String, Object> processedViewTrip(String startDate, String endDate) throws ParseException {
 
-		Map<String, Integer> resultMap = new HashMap<>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Set<String> routeIdSet = new HashSet<>();
 		Set<String> vehicleSet = new HashSet<>();
 		int suspendedVehicles = 0;
-
+		
 		List<SiteInformation> informationList = tripviewDao.ptocessedTripView(startDate, endDate);
 		
 		for(SiteInformation sitInfo : informationList){
@@ -43,6 +43,7 @@ public class TripViewServices {
 		resultMap.put("total", routeIdSet.size());
 		resultMap.put("unique", vehicleSet.size());
 		resultMap.put("suspended", suspendedVehicles);
+		resultMap.put("driverTableData", tripviewDao.getDriverTripData(startDate, endDate));
 
 		return resultMap;
 	}

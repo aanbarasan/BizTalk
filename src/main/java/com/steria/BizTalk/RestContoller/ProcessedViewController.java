@@ -19,12 +19,12 @@ public class ProcessedViewController {
 	TripViewServices tripviewServices;
 
 	@RequestMapping(value = "/api/processview", method = RequestMethod.POST)
-	public HashMap<String, Integer> search(@RequestBody HashMap<Object, Object> data) throws ParseException {
+	public HashMap<String, Object> search(@RequestBody HashMap<Object, Object> data) throws ParseException {
 
 		String start = data.get("start").toString();
 		String end = data.get("end").toString();
 
-		HashMap<String, Integer> map = (HashMap<String, Integer>) tripviewServices.processedViewTrip(start, end);
+		HashMap<String, Object> map = (HashMap<String, Object>) tripviewServices.processedViewTrip(start, end);
 		return map;
 	}
 }
