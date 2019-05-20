@@ -39,11 +39,11 @@ body {
 .pageHeader {
 	padding: 5px 20px;
 	background-color: #dfecff;
-    border-bottom: 5px solid #dbe9fd;
+	border-bottom: 5px solid #dbe9fd;
 }
 
 .pageBody {
-	background-color: #bdbdbd1c;
+	background-image: repeating-linear-gradient(#f1f1f1d9, white 60px, #f1f1f1d9 120px);
 	overflow: auto;
 	height: calc(100% - 74px);
 }
@@ -59,15 +59,15 @@ body {
 	padding: 10px;
 }
 
-.vehicleDetailsContainer > div {
+.vehicleDetailsContainer>div {
 	background-color: #dceaff;
-    border-radius: 5px;
-    border: 5px solid #d7e7ff;
+	border-radius: 5px;
+	border: 5px solid #d7e7ff;
 }
 
 .vehicleDetailsHead {
 	text-align: center;
-    padding-top: 10px;
+	padding-top: 10px;
 }
 
 .vehicleDetailsBody {

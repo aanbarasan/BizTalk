@@ -50,12 +50,12 @@ public class TripViewDao {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-		AggregateIterable<Document> output = mongoTemplate.getCollection("siteInformation")
-				.aggregate(Arrays.asList(Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
-						Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
-						Aggregates.group("$resourceDriver", Accumulators.push("journeyStart", "$journeyStart"),
-								Accumulators.push("resourceDriver", "$resourceDriver"), Accumulators
-										.push("journeyAlias", "$journeyAlias"))));
+		AggregateIterable<Document> output = mongoTemplate.getCollection("siteInformation").aggregate(Arrays.asList(
+				Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
+				Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
+				Aggregates.group(
+						new Document("resourceDriver", "$resourceDriver").append("journeyStart", "$journeyStart"),
+						Accumulators.push("journeyAlias", "$journeyAlias"))));
 
 		MongoCursor<Document> i = output.iterator();
 
@@ -65,14 +65,15 @@ public class TripViewDao {
 			HashMap<String, Object> map = new HashMap<>();
 			ArrayList<String> jdatelist = (ArrayList<String>) d.get("journeyStart");
 			ArrayList<String> journeyAliasList = (ArrayList<String>) d.get("journeyAlias");
-			
-			if(jdatelist != null){
+
+			if (jdatelist != null) {
 				map.put("journeyStart", jdatelist.stream().distinct().toArray());
 			}
-			if(journeyAliasList != null){
+			if (journeyAliasList != null) {
 				map.put("journeyAlias", journeyAliasList.stream().distinct().toArray());
 			}
-			map.put("name", d.get("_id"));
+			map.put("name", ((Document) d.get("_id")).get("resourceDriver"));
+			map.put("journeyStart", ((Document) d.get("_id")).get("journeyStart"));
 			doc.add(map);
 		}
 

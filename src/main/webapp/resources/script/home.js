@@ -56,7 +56,7 @@ function loadDriverDetails(data) {
 		field : 'journeyStart',
 		title : 'Date',
 		formatter: function(value, row, index, field){
-			return new Date(value[0]).toLocaleDateString();
+			return new Date(value).toLocaleString();
 		}
 	}, {
 		field : 'name',
