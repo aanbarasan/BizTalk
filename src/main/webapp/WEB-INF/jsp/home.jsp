@@ -6,32 +6,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>BizTalk</title>
 <link rel="stylesheet" type="text/css"
-	href="/resources/plugins/boostrap-4.0.0/bootstrap.css" />
+	href="plugins/boostrap-4.0.0/bootstrap.css" />
 <link rel="stylesheet" type="text/css"
-	href="/resources/plugins/bootstrap-table/bootstrap-table.min.css" />
+	href="plugins/bootstrap-table/bootstrap-table.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="/resources/plugins/daterangepicker/daterangepicker.css" />
+	href="plugins/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet"
-	href="/resources/plugins/fontawesome_5.8.2/all/all.css">
+	href="plugins/fontawesome_5.8.2/all/all.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/stylesheet/home.css" />
-<script src="/resources/plugins/jquery/jquery.min.js"
+	href="stylesheet/home.css" />
+<script src="plugins/jquery/jquery.min.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/boostrap-4.0.0/bootstrap.js"
+<script src="plugins/boostrap-4.0.0/bootstrap.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/bootstrap-table/bootstrap-table.min.js"
+<script src="plugins/bootstrap-table/bootstrap-table.min.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/moment/moment.min.js"
+<script src="plugins/moment/moment.min.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/daterangepicker/daterangepicker.js"
+<script src="plugins/daterangepicker/daterangepicker.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/highcharts/highcharts.js"
+<script src="plugins/highcharts/highcharts.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/highcharts/highcharts-3d.js"
+<script src="plugins/highcharts/highcharts-3d.js"
 	type="text/javascript"></script>
-<script src="/resources/plugins/highcharts/exporting.js"
+<script src="plugins/highcharts/exporting.js"
 	type="text/javascript"></script>
-<script src="/resources/script/home.js" type="text/javascript"></script>
+<script src="script/home.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="pageSlider hideSlider">
