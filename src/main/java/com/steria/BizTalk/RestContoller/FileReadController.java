@@ -22,7 +22,7 @@ public class FileReadController {
 
 	@RequestMapping("/readFiles")
 	public String readefile() {
-
+		
 		tripReadObj.readFiles(processedDirPath);
 		
 		return "Finished";

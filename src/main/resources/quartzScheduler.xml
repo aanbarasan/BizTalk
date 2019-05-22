@@ -28,7 +28,7 @@
 	<bean id="cronTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="runMeJob" />
-		<property name="cronExpression" value="0/5 * * * * ?" />
+		<property name="cronExpression" value="0 0 9 * * ?" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -39,9 +39,10 @@
 		</property>
 		<property name="triggers">
 			<list>
-				<ref bean="simpleTrigger" />
+				<ref bean="cronTrigger" />
 			</list>
 		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext"></property>
 	</bean>
 
 </beans>

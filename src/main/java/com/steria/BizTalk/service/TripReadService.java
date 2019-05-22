@@ -33,7 +33,8 @@ public class TripReadService {
 	TrackingDAO trackingDao;
 
 	public void readFiles(String inpath) {
-		System.out.println("Parsing started: " + new Date().toString());
+		
+		System.out.println("Parsing started:" + new Date());
 		List<SiteInformation> sitelist = new ArrayList<>();
 		SiteInformation siteInformation = new SiteInformation();
 		String routeId = null;
@@ -43,24 +44,16 @@ public class TripReadService {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-
 			if (files.length > 0) {
-
 				for (File file : files) {
 					if (file.length() != 0) {
 						Document doc = dBuilder.parse(file);
-
 						doc.getDocumentElement().normalize();
-
 						NodeList nList = doc.getElementsByTagName("journey");
-
 						for (int temp = 0; temp < nList.getLength(); temp++) {
-
 							Node nNode = nList.item(temp);
 							Element eElement = (Element) nNode;
-
 							NodeList siteList = eElement.getElementsByTagName("site");
-
 							for (int j = 0; j < siteList.getLength(); j++) {
 								Node siteNode = siteList.item(j);
 								Element siteElement = (Element) siteNode;
@@ -68,33 +61,30 @@ public class TripReadService {
 								routeId = siteInformation.getRouteId();
 								siteInformation = new SiteInformation();
 							}
-
 						}
-
 						trackingDao.addSiteInfo(sitelist, routeId);
 					}
 				}
 			}
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("Parsing end: " + new Date().toString());
-
 	}
 
 	@SuppressWarnings("deprecation")
-	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation) throws DOMException, ParseException {
+	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation)
+			throws DOMException, ParseException {
 
 		siteInformation.setRouteId(eElement.getElementsByTagName("routeId").item(0) != null
 				? eElement.getElementsByTagName("routeId").item(0).getTextContent() : null);
 
 		siteInformation.setJourneyAlias(eElement.getElementsByTagName("journeyAlias").item(0) != null
 				? eElement.getElementsByTagName("journeyAlias").item(0).getTextContent() : null);
-		
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		
-		siteInformation.setJourneyStart(format.parse(eElement.getElementsByTagName("journeyStart").item(0).getTextContent()));
+
+		siteInformation
+				.setJourneyStart(format.parse(eElement.getElementsByTagName("journeyStart").item(0).getTextContent()));
 
 		siteInformation.setPlannedDistance(eElement.getElementsByTagName("plannedDistance").item(0) != null
 				? eElement.getElementsByTagName("plannedDistance").item(0).getTextContent() : null);

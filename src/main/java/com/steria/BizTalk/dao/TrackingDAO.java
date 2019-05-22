@@ -28,15 +28,11 @@ public class TrackingDAO {
 		boolean status = false;
 
 		try {
-
 			SiteInformation SiteInformation = mongoTemplate.findOne(Query.query(Criteria.where("routeId").is(tripId)),
 					SiteInformation.class);
 			if (SiteInformation == null) {
 				mongoTemplate.insertAll(siteList);
-			} else {
-				System.out.println("Route Id already Exist");
 			}
-
 			status = true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
