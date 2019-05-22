@@ -94,6 +94,8 @@ chartGraphicsComponent = {
 	forwardInc : true,
 	timeout : 50
 };
+
+
 function loadChart(data) {
 	var chartData = {
 		"x" : [ "No of vehicle information",
@@ -101,7 +103,7 @@ function loadChart(data) {
 				"No of suspended vehicles" ],
 		y : [ data.total, data.unique, data.suspended ]
 	};
-		
+	
 	Math.easeOutBounce = function(pos) {
 		if ((pos) < (1 / 2.75)) {
 			return (7.5625 * pos * pos);
