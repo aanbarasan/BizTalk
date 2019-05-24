@@ -1,3 +1,5 @@
+var baseURL = window.biztalkBaseURL;
+
 $(document).ready(function() {
 	loadDatePiker();
 });
@@ -39,7 +41,7 @@ function loadData(start, end) {
 	};
 	$.ajax({
 		method : "POST",
-		url : "api/processview",
+		url : baseURL + "api/processview",
 		dataType : "json",
 		contentType : "application/json",
 		data : JSON.stringify(postData),
