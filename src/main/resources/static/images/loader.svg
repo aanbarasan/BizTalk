@@ -1,0 +1,57 @@
+<svg class="lds-message" width="100%" height="100%"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100"
+							preserveAspectRatio="xMidYMid" style="background: none;"> <g
+							transform="translate(11.11111111111111 50)"> <circle cx="0"
+							cy="0" r="3" fill="#2153b8"
+							transform="scale(0.0149785 0.0149785)"> <animateTransform
+							attributeName="transform" type="scale" begin="-0.525s"
+							calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+							values="0;1;0" keyTimes="0;0.5;1" dur="1.2s"
+							repeatCount="indefinite"></animateTransform> </circle> </g> <g
+							transform="translate(22.22222222222222 50)"> <circle cx="0"
+							cy="0" r="3" fill="#4368b4" transform="scale(0.011593 0.011593)">
+						<animateTransform attributeName="transform" type="scale"
+							begin="-0.44999999999999996s" calcMode="spline"
+							keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0"
+							keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite"></animateTransform>
+						</circle> </g> <g transform="translate(33.333333333333336 50)"> <circle
+							cx="0" cy="0" r="3" fill="#2059ce"
+							transform="scale(0.0972784 0.0972784)"> <animateTransform
+							attributeName="transform" type="scale" begin="-0.375s"
+							calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+							values="0;1;0" keyTimes="0;0.5;1" dur="1.2s"
+							repeatCount="indefinite"></animateTransform> </circle> </g> <g
+							transform="translate(44.44444444444444 50)"> <circle cx="0"
+							cy="0" r="3" fill="#467ae3" transform="scale(0.236818 0.236818)">
+						<animateTransform attributeName="transform" type="scale"
+							begin="-0.3s" calcMode="spline"
+							keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0"
+							keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite"></animateTransform>
+						</circle> </g> <g transform="translate(55.55555555555556 50)"> <circle
+							cx="0" cy="0" r="3" fill="#2153b8"
+							transform="scale(0.400578 0.400578)"> <animateTransform
+							attributeName="transform" type="scale"
+							begin="-0.22499999999999998s" calcMode="spline"
+							keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0"
+							keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite"></animateTransform>
+						</circle> </g> <g transform="translate(66.66666666666667 50)"> <circle
+							cx="0" cy="0" r="3" fill="#4368b4"
+							transform="scale(0.587088 0.587088)"> <animateTransform
+							attributeName="transform" type="scale" begin="-0.15s"
+							calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+							values="0;1;0" keyTimes="0;0.5;1" dur="1.2s"
+							repeatCount="indefinite"></animateTransform> </circle> </g> <g
+							transform="translate(77.77777777777777 50)"> <circle cx="0"
+							cy="0" r="3" fill="#2059ce" transform="scale(0.752596 0.752596)">
+						<animateTransform attributeName="transform" type="scale"
+							begin="-0.075s" calcMode="spline"
+							keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0"
+							keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite"></animateTransform>
+						</circle> </g> <g transform="translate(88.88888888888889 50)"> <circle
+							cx="0" cy="0" r="3" fill="#467ae3"
+							transform="scale(0.89475 0.89475)"> <animateTransform
+							attributeName="transform" type="scale" begin="0s"
+							calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+							values="0;1;0" keyTimes="0;0.5;1" dur="1.2s"
+							repeatCount="indefinite"></animateTransform> </circle> </g></svg>

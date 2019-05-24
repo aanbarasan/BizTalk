@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,6 +25,7 @@ import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.steria.BizTalk.dto.SiteInformation;
+import com.steria.BizTalk.service.TripReadService;
 
 /**
  * @author ndevados
@@ -35,14 +38,17 @@ public class TripViewDao {
 	@Autowired
 	MongoTemplate mongoTemplate;
 
-	public List<SiteInformation> ptocessedTripView(String startDate, String endDate) throws ParseException {
+	private static final Logger logger = LoggerFactory.getLogger(TripViewDao.class);
+
+	public AggregateIterable<Document> ptocessedTripView(String startDate, String endDate) throws ParseException {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		List<SiteInformation> siteList = mongoTemplate.find(
-				Query.query(Criteria.where("journeyStart").gte(format.parse(startDate)).lte(format.parse(endDate))),
-				SiteInformation.class);
 
-		return siteList;
+		AggregateIterable<Document> output = mongoTemplate.getCollection("siteInformation")
+				.aggregate(Arrays.asList(Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
+						Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
+						Aggregates.group(new Document("routeId", "$routeId").append("vehicle", "$vehicle"))));
+		return output;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -58,7 +64,7 @@ public class TripViewDao {
 						Accumulators.push("journeyAlias", "$journeyAlias"))));
 
 		MongoCursor<Document> i = output.iterator();
-
+		logger.debug("Driver data looping started");
 		List<HashMap<String, Object>> doc = new ArrayList<HashMap<String, Object>>();
 		while (i.hasNext()) {
 			Document d = i.next();
@@ -76,6 +82,7 @@ public class TripViewDao {
 			map.put("journeyStart", ((Document) d.get("_id")).get("journeyStart"));
 			doc.add(map);
 		}
+		logger.debug("Driver data looping end");
 
 		return doc;
 	}

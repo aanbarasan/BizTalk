@@ -31,6 +31,8 @@ function loadDatePiker() {
 }
 
 function loadData(start, end) {
+	$("#searchDetailsContainer").hide();
+	$("#searchDetailsContainerLoader").show();
 	var postData = {
 		"start" : start + "T00:00:000",
 		"end" : end + "T23:59:999"
@@ -43,6 +45,7 @@ function loadData(start, end) {
 		data : JSON.stringify(postData),
 	}).done(function(data) {
 		$("#searchDetailsContainer").show();
+		$("#searchDetailsContainerLoader").hide();
 		loadChart(data);
 		loadTable(data);
 		loadDriverDetails(data);

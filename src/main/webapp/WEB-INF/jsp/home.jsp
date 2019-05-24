@@ -11,31 +11,23 @@
 	href="plugins/bootstrap-table/bootstrap-table.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="plugins/daterangepicker/daterangepicker.css" />
-<link rel="stylesheet"
-	href="plugins/fontawesome_5.8.2/all/all.css">
-<link rel="stylesheet" type="text/css"
-	href="stylesheet/home.css" />
-<script src="plugins/jquery/jquery.min.js"
-	type="text/javascript"></script>
-<script src="plugins/boostrap-4.0.0/bootstrap.js"
-	type="text/javascript"></script>
+<link rel="stylesheet" href="plugins/fontawesome_5.8.2/all/all.css">
+<link rel="stylesheet" type="text/css" href="stylesheet/home.css" />
+<script src="plugins/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="plugins/boostrap-4.0.0/bootstrap.js" type="text/javascript"></script>
 <script src="plugins/bootstrap-table/bootstrap-table.min.js"
 	type="text/javascript"></script>
-<script src="plugins/moment/moment.min.js"
-	type="text/javascript"></script>
+<script src="plugins/moment/moment.min.js" type="text/javascript"></script>
 <script src="plugins/daterangepicker/daterangepicker.js"
 	type="text/javascript"></script>
-<script src="plugins/highcharts/highcharts.js"
-	type="text/javascript"></script>
-<script src="plugins/highcharts/highcharts-3d.js"
-	type="text/javascript"></script>
-<script src="plugins/highcharts/exporting.js"
-	type="text/javascript"></script>
+<script src="plugins/highcharts/highcharts.js" type="text/javascript"></script>
+<script src="plugins/highcharts/highcharts-3d.js" type="text/javascript"></script>
+<script src="plugins/highcharts/exporting.js" type="text/javascript"></script>
 <script src="script/home.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="pageSlider hideSlider">
-		<div style="padding: 10px 20px;border-bottom: 5px solid #dbe9fd;">
+		<div style="padding: 10px 20px; border-bottom: 5px solid #dbe9fd;">
 			<div onclick="togglePageSlider('hide', event)"
 				style="font-size: 21px; display: inline-block; padding: 0px 10px; cursor: pointer;">
 				<i class="fas fa-bars"></i>
@@ -105,10 +97,10 @@
 							</div>
 						</div>
 						<div class="row col-md-12">
-							<div style="width:100%;padding: 10px;margin-top: 40px;">
+							<div style="width: 100%; padding: 10px; margin-top: 40px;">
 								<h5>Driver trip details:</h5>
 							</div>
-							<div style="width:100%;background-color: white;">
+							<div style="width: 100%; background-color: white;">
 								<table id="driverDetails"></table>
 							</div>
 						</div>
@@ -118,6 +110,11 @@
 							graph based on the vehicle counts</h5>
 						<div id="chart" style="border: 1px solid #ccd6eb;"
 							ondblclick="toggleChartGraphics()"></div>
+					</div>
+				</div>
+				<div id="searchDetailsContainerLoader" style="text-align: center;">
+					<div style="width:250px;display:inline-block;">
+						<img src="images/loader.svg"/>
 					</div>
 				</div>
 			</div>
