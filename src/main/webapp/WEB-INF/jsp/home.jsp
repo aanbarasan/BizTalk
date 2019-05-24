@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>BizTalk</title>
 <link rel="stylesheet" type="text/css"
@@ -56,71 +57,69 @@
 				vehicle stats</div>
 		</div>
 		<div class="pageBody">
-			<div style="padding: 30px;">
-				<div class="col-md-12 nopadding">
-					<h5 style="margin: 0px;">
-						Please enter the start date and end date: <input type="text"
-							id="dateRange" class="form-control"
-							style="display: inline; width: 220px;">
-					</h5>
-				</div>
-				<div class="row col-md-12" id="searchDetailsContainer"
-					style="display: none; padding: 0px 15px;">
-					<div class="row col-md-6" style="padding: 33px 15px;">
-						<div class="row col-md-12">
-							<div class="col-md-4 vehicleDetailsContainer">
-								<div>
-									<div class="col-md-12 vehicleDetailsHead">No of vehicle
-										passed from BizTalk to Microlise</div>
-									<div class="col-md-12 vehicleDetailsBody">
-										<span id="vehicleTotal"></span>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 vehicleDetailsContainer">
-								<div>
-									<div class="col-md-12 vehicleDetailsHead">No of unique
-										vehicles passed from BizTalk to Microlise</div>
-									<div class="col-md-12 vehicleDetailsBody">
-										<span id="vehicleUnique"></span>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 vehicleDetailsContainer">
-								<div>
-									<div class="col-md-12 vehicleDetailsHead">No of vehicle
-										details suspended at BizTalk</div>
-									<div class="col-md-12 vehicleDetailsBody">
-										<span id="vehicleSuspended"></span>
-									</div>
+			<div class="col-md-12">
+				<h5 style="margin: 0px;">
+					Please enter the start date and end date: <input type="text"
+						id="dateRange" class="form-control"
+						style="display: inline; width: 220px;">
+				</h5>
+			</div>
+			<div class="row col-md-12 nopadding" id="searchDetailsContainer"
+				style="display: none;">
+				<div class="row col-md-6" style="padding: 33px 15px;">
+					<div class="row col-md-12 nopadding">
+						<div class="col-md-4 vehicleDetailsContainer">
+							<div>
+								<div class="col-md-12 vehicleDetailsHead">No of vehicle
+									passed from BizTalk to Microlise</div>
+								<div class="col-md-12 vehicleDetailsBody">
+									<span id="vehicleTotal"></span>
 								</div>
 							</div>
 						</div>
-						<div class="row col-md-12">
-							<div style="width: 100%; padding: 10px; margin-top: 40px;">
-								<h5>Driver trip details:</h5>
+						<div class="col-md-4 vehicleDetailsContainer">
+							<div>
+								<div class="col-md-12 vehicleDetailsHead">No of unique
+									vehicles passed from BizTalk to Microlise</div>
+								<div class="col-md-12 vehicleDetailsBody">
+									<span id="vehicleUnique"></span>
+								</div>
 							</div>
-							<div style="width: 100%; background-color: white;">
-								<table id="driverDetails"></table>
+						</div>
+						<div class="col-md-4 vehicleDetailsContainer">
+							<div>
+								<div class="col-md-12 vehicleDetailsHead">No of vehicle
+									details suspended at BizTalk</div>
+								<div class="col-md-12 vehicleDetailsBody">
+									<span id="vehicleSuspended"></span>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<h5 style="text-align: center;">This section will produce
-							graph based on the vehicle counts</h5>
-						<div id="chart" style="border: 1px solid #ccd6eb;"
-							ondblclick="toggleChartGraphics()"></div>
+					<div class="row col-md-12">
+						<div style="width: 100%; padding: 10px; margin-top: 40px;">
+							<h5>Driver trip details:</h5>
+						</div>
+						<div style="width: 100%; background-color: white;">
+							<table id="driverDetails"></table>
+						</div>
 					</div>
 				</div>
-				<div id="searchDetailsContainerLoader" style="text-align: center;">
-					<div style="width:250px;display:inline-block;">
-						<img src="images/loader.svg"/>
-					</div>
+				<div class="col-md-6">
+					<h5 style="text-align: center;">This section will produce
+						graph based on the vehicle counts</h5>
+					<div id="chart" style="border: 1px solid #ccd6eb;"
+						ondblclick="toggleChartGraphics()"></div>
+				</div>
+			</div>
+			<div id="searchDetailsContainerLoader" style="text-align: center;">
+				<div style="width: 250px; display: inline-block;">
+					<img src="images/loader.svg" />
 				</div>
 			</div>
 		</div>
 		<div class="pageFooter">
-			<div>
+			<div style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
 				Copyright © 2019 Sopra Steria Inc. All rights reserved. <span
 					style="text-decoration: underline; cursor: pointer;">Terms
 					of use</span>
