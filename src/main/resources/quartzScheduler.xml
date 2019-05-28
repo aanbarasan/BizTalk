@@ -28,7 +28,7 @@
 	<bean id="cronTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="runMeJob" />
-		<property name="cronExpression" value="0 0 9 * * ?" />
+		<property name="cronExpression" value="0 25 19 * * ?" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
