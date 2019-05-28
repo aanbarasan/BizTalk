@@ -10,6 +10,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -31,10 +33,12 @@ public class TripReadService {
 
 	@Autowired
 	TrackingDAO trackingDao;
+	
+	private static final Logger logger = LoggerFactory.getLogger(TripReadService.class);
 
 	public void readFiles(String inpath) {
 		
-		System.out.println("Parsing started:" + new Date());
+		logger.debug("Parsing started");
 		List<SiteInformation> sitelist = new ArrayList<>();
 		SiteInformation siteInformation = new SiteInformation();
 		String routeId = null;
@@ -69,6 +73,7 @@ public class TripReadService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		logger.debug("Parsing end");
 	}
 
 	@SuppressWarnings("deprecation")

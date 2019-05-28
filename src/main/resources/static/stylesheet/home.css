@@ -11,6 +11,10 @@ body {
 	padding: 0 !important;
 }
 
+.row{
+	margin: 0px;
+}
+
 .pageContent {
 	width: 100%;
 	height: 100%;
@@ -26,14 +30,6 @@ body {
 	height: 100%;
 	left: 0px;
 	transition: 0.5s all;
-}
-
-.sliderMenuList {
-	padding: 5px;
-}
-
-.hideSlider {
-	left: -200px;
 }
 
 .pageHeader {
@@ -53,6 +49,36 @@ body {
 	padding: 5px 15px;
 	font-size: 12px;
 	font-family: monospace;
+}
+
+.sliderMenuList {
+	padding: 5px;
+}
+
+.hideSlider {
+	left: -200px;
+}
+
+#searchDetailsContainer {
+	padding: 0px 15px;
+}
+
+@media only screen and (min-width: 1px) {
+	.pageBody {
+		padding: 5px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.pageBody {
+		padding: 15px;
+	}
+}
+
+@media only screen and (min-width: 1023px) {
+	.pageBody {
+		padding: 30px;
+	}
 }
 
 .vehicleDetailsContainer {

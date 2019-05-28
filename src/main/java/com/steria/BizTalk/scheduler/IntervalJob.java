@@ -1,7 +1,5 @@
 package com.steria.BizTalk.scheduler;
 
-import java.util.Date;
-
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
