@@ -1,12 +1,13 @@
 var baseURL = window.biztalkBaseURL;
+var pickerStartDate, pickerEndDate;
 
 $(document).ready(function() {
 	loadDatePiker();
 });
 
 function togglePageSlider(action, event) {
-	event.stopPropagation();
 	if (action == 'show') {
+		event.stopPropagation();
 		$(".pageSlider").removeClass("hideSlider");
 	} else if (action == 'hide') {
 		$(".pageSlider").addClass("hideSlider");
@@ -21,23 +22,31 @@ function loadDatePiker() {
 	// options.timePicker = true;
 	// options.timePicker24Hour = true;
 	$("#dateRange").daterangepicker(options);
-	$('#dateRange').on(
-			'apply.daterangepicker',
-			function(ev, picker) {
-				loadData(picker.startDate.format('YYYY-MM-DD'), picker.endDate
-						.format('YYYY-MM-DD')); // Thh:mm:ss
-			});
+	$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
+		pickerStartDate = picker.startDate.format('YYYY-MM-DD');
+		pickerEndDate = picker.endDate.format('YYYY-MM-DD');
+		loadData(pickerStartDate, pickerEndDate); // Thh:mm:ss
+	});
 
 	$(".daterangepicker .applyBtn").prop("disabled", false);
 	$(".daterangepicker .applyBtn").click();
 }
 
+function toggleProcessType(){
+	loadData(pickerStartDate, pickerEndDate);
+}
+
 function loadData(start, end) {
 	$("#searchDetailsContainer").hide();
 	$("#searchDetailsContainerLoader").show();
+	var type = "Processed";
+	if ($("#processTypeToggle").prop("checked") == false) {
+		type = "Unprocessed";
+	}
 	var postData = {
 		"start" : start + "T00:00:000",
-		"end" : end + "T23:59:999"
+		"end" : end + "T23:59:999",
+		"type" : type
 	};
 	$.ajax({
 		method : "POST",
@@ -55,12 +64,12 @@ function loadData(start, end) {
 }
 
 function loadDriverDetails(data) {
-	
+
 	$("#driverDetails").bootstrapTable('destroy')
 	var columns = [ {
 		field : 'journeyStart',
 		title : 'Date',
-		formatter: function(value, row, index, field){
+		formatter : function(value, row, index, field) {
 			return new Date(value).toLocaleString();
 		}
 	}, {
@@ -69,16 +78,16 @@ function loadDriverDetails(data) {
 	}, {
 		field : 'journeyAlias',
 		title : 'Trip Count',
-		formatter: function(value, row, index, field){
+		formatter : function(value, row, index, field) {
 			return value.length;
 		}
 	} ];
-	
+
 	$("#driverDetails").bootstrapTable({
-		columns: columns,
-		data: data.driverTableData,
-		height: 500,
-		pagination: true
+		columns : columns,
+		data : data.driverTableData,
+		height : 500,
+		pagination : true
 	});
 }
 
@@ -88,10 +97,8 @@ function loadTable(data) {
 	$("#vehicleSuspended").html(data.suspended);
 }
 
-let
-viewChart;
-let
-chartGraphicsComponent = {
+let viewChart;
+let chartGraphicsComponent = {
 	betaMin : -20,
 	betaMax : 20,
 	betaCur : -0,
@@ -100,15 +107,12 @@ chartGraphicsComponent = {
 	timeout : 50
 };
 
-
 function loadChart(data) {
 	var chartData = {
-		"x" : [ "No of vehicle information",
-				"No of unique vehicles",
-				"No of suspended vehicles" ],
+		"x" : [ "No of vehicle information", "No of unique vehicles", "No of suspended vehicles" ],
 		y : [ data.total, data.unique, data.suspended ]
 	};
-	
+
 	Math.easeOutBounce = function(pos) {
 		if ((pos) < (1 / 2.75)) {
 			return (7.5625 * pos * pos);
@@ -157,8 +161,7 @@ function loadChart(data) {
 		} ],
 		tooltip : {
 			formatter : function() {
-				return '<b>' + this.series.name + '</b><br/>' + this.point.y
-						+ ' ' + this.x;
+				return '<b>' + this.series.name + '</b><br/>' + this.point.y + ' ' + this.x;
 			}
 		},
 		exporting : {
@@ -167,8 +170,7 @@ function loadChart(data) {
 	});
 }
 
-let
-chartRotate = false, graphicsTimeout;
+let chartRotate = false, graphicsTimeout;
 function toggleChartGraphics() {
 	if (graphicsTimeout) {
 		clearInterval(graphicsTimeout);

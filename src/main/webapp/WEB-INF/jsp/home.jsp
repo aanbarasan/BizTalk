@@ -11,12 +11,16 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/plugins/bootstrap-table/bootstrap-table.min.css"/>" />
 <link rel="stylesheet" type="text/css"
+	href="<c:url value="/plugins/bootstrap-toggle/bootstrap4-toggle.min.css"/>" />
+<link rel="stylesheet" type="text/css"
 	href="<c:url value="/plugins/daterangepicker/daterangepicker.css"/>" />
 <link rel="stylesheet" href="<c:url value="/plugins/fontawesome_5.8.2/all/all.css"/> ">
 <link rel="stylesheet" type="text/css" href="<c:url value="/stylesheet/home.css"/>" />
 <script src="<c:url value="/plugins/jquery/jquery.min.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/plugins/boostrap-4.0.0/bootstrap.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/plugins/bootstrap-table/bootstrap-table.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/plugins/bootstrap-toggle/bootstrap4-toggle.min.js"/>"
 	type="text/javascript"></script>
 <script src="<c:url value="/plugins/moment/moment.min.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/plugins/daterangepicker/daterangepicker.js"/>" type="text/javascript"></script>
@@ -56,8 +60,14 @@
 		<div class="pageBody">
 			<div class="col-md-12">
 				<h5 style="margin: 0px;">
-					Please enter the start date and end date: <input type="text" id="dateRange"
-						class="form-control" style="display: inline; width: 220px;">
+					Please enter the start date and end date:
+					<div style="display: inline-block;">
+						<input type="text" id="dateRange" class="form-control" style="display: inline; width: 220px;" />
+					</div>
+					<div style="display: inline-block;">
+						<input type="checkbox" checked id="processTypeToggle" data-toggle="toggle" data-on="Processed"
+							data-off="Unprocessed" data-onstyle="success" data-offstyle="danger" onchange="toggleProcessType()">
+					</div>
 				</h5>
 			</div>
 			<div class="row col-md-12 nopadding" id="searchDetailsContainer" style="display: none;">

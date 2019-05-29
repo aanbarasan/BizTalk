@@ -23,8 +23,9 @@ public class ProcessedViewController {
 
 		String start = data.get("start").toString();
 		String end = data.get("end").toString();
+		String type = data.get("type").toString();
 
-		HashMap<String, Object> map = (HashMap<String, Object>) tripviewServices.processedViewTrip(start, end);
+		HashMap<String, Object> map = (HashMap<String, Object>) tripviewServices.processedViewTrip(start, end, type);
 		return map;
 	}
 }

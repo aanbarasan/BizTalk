@@ -32,14 +32,14 @@ public class TripViewServices {
 
 	private static final Logger logger = LoggerFactory.getLogger(TripViewServices.class);
 	
-	public Map<String, Object> processedViewTrip(String startDate, String endDate) throws ParseException {
+	public Map<String, Object> processedViewTrip(String startDate, String endDate, String type) throws ParseException {
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Set<String> routeIdSet = new HashSet<>();
 		Set<String> vehicleSet = new HashSet<>();
 		int suspendedVehicles = 0;
 		logger.debug("Tripview counter started");
-		AggregateIterable<Document> informationList = tripviewDao.ptocessedTripView(startDate, endDate);
+		AggregateIterable<Document> informationList = tripviewDao.ptocessedTripView(startDate, endDate, type);
 		logger.debug("Tripview counter end");
 		
 		for(Document sitInfo : informationList){
@@ -51,7 +51,7 @@ public class TripViewServices {
 		resultMap.put("unique", vehicleSet.size());
 		resultMap.put("suspended", suspendedVehicles);
 		logger.debug("Driver data fetch started");
-		resultMap.put("driverTableData", tripviewDao.getDriverTripData(startDate, endDate));
+		resultMap.put("driverTableData", tripviewDao.getDriverTripData(startDate, endDate, type));
 		logger.debug("Driver data fetch end");
 
 		return resultMap;

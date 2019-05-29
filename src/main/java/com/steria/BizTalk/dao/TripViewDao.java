@@ -15,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.client.AggregateIterable;
@@ -24,8 +22,6 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
-import com.steria.BizTalk.dto.SiteInformation;
-import com.steria.BizTalk.service.TripReadService;
 
 /**
  * @author ndevados
@@ -40,28 +36,29 @@ public class TripViewDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(TripViewDao.class);
 
-	public AggregateIterable<Document> ptocessedTripView(String startDate, String endDate) throws ParseException {
+	public AggregateIterable<Document> ptocessedTripView(String startDate, String endDate, String type) throws ParseException {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-		AggregateIterable<Document> output = mongoTemplate.getCollection("siteInformation")
-				.aggregate(Arrays.asList(Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
+		AggregateIterable<Document> output = mongoTemplate.getCollection("TripDetails")
+				.aggregate(Arrays.asList(Aggregates.match(Filters.eq("status", type)),
+						Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
 						Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
 						Aggregates.group(new Document("routeId", "$routeId").append("vehicle", "$vehicle"))));
 		return output;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<HashMap<String, Object>> getDriverTripData(String startDate, String endDate) throws ParseException {
+	public List<HashMap<String, Object>> getDriverTripData(String startDate, String endDate, String type) throws ParseException {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-		AggregateIterable<Document> output = mongoTemplate.getCollection("siteInformation").aggregate(Arrays.asList(
-				Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
-				Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
-				Aggregates.group(
-						new Document("resourceDriver", "$resourceDriver").append("journeyStart", "$journeyStart"),
-						Accumulators.push("journeyAlias", "$journeyAlias"))));
+		AggregateIterable<Document> output = mongoTemplate.getCollection("TripDetails")
+				.aggregate(Arrays.asList(Aggregates.match(Filters.eq("status", type)),
+						Aggregates.match(Filters.gte("journeyStart", format.parse(startDate))),
+						Aggregates.match(Filters.lte("journeyStart", format.parse(endDate))),
+						Aggregates.group(new Document("resourceDriver", "$resourceDriver").append("journeyStart", "$journeyStart"),
+								Accumulators.push("journeyAlias", "$journeyAlias"))));
 
 		MongoCursor<Document> i = output.iterator();
 		logger.debug("Driver data looping started");
