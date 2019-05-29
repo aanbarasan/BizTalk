@@ -64,7 +64,7 @@
 					<div style="display: inline-block;">
 						<input type="text" id="dateRange" class="form-control" style="display: inline; width: 220px;" />
 					</div>
-					<div style="display: inline-block;">
+					<div style="display: inline-block;padding: 0px 20px;">
 						<input type="checkbox" checked id="processTypeToggle" data-toggle="toggle" data-on="Processed"
 							data-off="Unprocessed" data-onstyle="success" data-offstyle="danger" onchange="toggleProcessType()">
 					</div>
