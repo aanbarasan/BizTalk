@@ -2,10 +2,14 @@ package com.steria.BizTalk.dto;
 
 import java.util.Date;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author ndevados
  *
  */
+
+@Document(collection = "TripDetails")
 public class SiteInformation {
 
 	private String routeId;
@@ -25,6 +29,22 @@ public class SiteInformation {
 	private String sitePostCode;
 	private String latitude;
 	private String longitude;
+	private String status;
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status
+	 *            the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	/**
 	 * @return the routeId

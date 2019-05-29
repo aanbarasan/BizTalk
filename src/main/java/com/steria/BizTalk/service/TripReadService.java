@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -33,11 +32,11 @@ public class TripReadService {
 
 	@Autowired
 	TrackingDAO trackingDao;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(TripReadService.class);
 
-	public void readFiles(String inpath) {
-		
+	public void readFiles(String inpath, String fileType) {
+
 		logger.debug("Parsing started");
 		List<SiteInformation> sitelist = new ArrayList<>();
 		SiteInformation siteInformation = new SiteInformation();
@@ -61,12 +60,12 @@ public class TripReadService {
 							for (int j = 0; j < siteList.getLength(); j++) {
 								Node siteNode = siteList.item(j);
 								Element siteElement = (Element) siteNode;
-								sitelist.add(setValueToPojo(eElement, siteElement, siteInformation));
+								sitelist.add(setValueToPojo(eElement, siteElement, siteInformation, fileType));
 								routeId = siteInformation.getRouteId();
 								siteInformation = new SiteInformation();
 							}
 						}
-						trackingDao.addSiteInfo(sitelist, routeId);
+						trackingDao.addSiteInfo(sitelist, routeId, fileType);
 					}
 				}
 			}
@@ -77,8 +76,8 @@ public class TripReadService {
 	}
 
 	@SuppressWarnings("deprecation")
-	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation)
-			throws DOMException, ParseException {
+	private SiteInformation setValueToPojo(Element eElement, Element siteElement, SiteInformation siteInformation,
+			String fileType) throws DOMException, ParseException {
 
 		siteInformation.setRouteId(eElement.getElementsByTagName("routeId").item(0) != null
 				? eElement.getElementsByTagName("routeId").item(0).getTextContent() : null);
@@ -136,6 +135,12 @@ public class TripReadService {
 				? siteElement.getElementsByTagName("latitude").item(0).getTextContent() : null);
 		siteInformation.setLongitude(siteElement.getElementsByTagName("longitude").item(0) != null
 				? siteElement.getElementsByTagName("longitude").item(0).getTextContent() : null);
+
+		if ("process".equalsIgnoreCase(fileType)) {
+			siteInformation.setStatus("Processed");
+		} else {
+			siteInformation.setStatus("Unprocessed");
+		}
 
 		return siteInformation;
 

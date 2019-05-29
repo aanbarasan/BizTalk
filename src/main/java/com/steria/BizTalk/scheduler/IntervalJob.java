@@ -34,7 +34,7 @@ public class IntervalJob implements Job {
 			}
 		}
 
-		tripReadObj.readFiles(processedDirPath);
+		tripReadObj.readFiles(processedDirPath, "process");
 	}
 
 }

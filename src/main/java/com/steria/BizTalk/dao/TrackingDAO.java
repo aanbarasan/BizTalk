@@ -6,6 +6,7 @@ package com.steria.BizTalk.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,8 +23,10 @@ public class TrackingDAO {
 
 	@Autowired
 	MongoTemplate mongoTemplate;
+	@Autowired
+	MongoOperations mongo;
 
-	public boolean addSiteInfo(List<SiteInformation> siteList, String tripId) {
+	public boolean addSiteInfo(List<SiteInformation> siteList, String tripId, String fileType) {
 
 		boolean status = false;
 
@@ -31,7 +34,8 @@ public class TrackingDAO {
 			SiteInformation SiteInformation = mongoTemplate.findOne(Query.query(Criteria.where("routeId").is(tripId)),
 					SiteInformation.class);
 			if (SiteInformation == null) {
-				mongoTemplate.insertAll(siteList);
+
+				mongo.insert(siteList, "TripDetails");
 			}
 			status = true;
 		} catch (Exception ex) {
