@@ -52,9 +52,14 @@ public class TripReadService {
 					if (file.length() != 0) {
 						Document doc = dBuilder.parse(file);
 						doc.getDocumentElement().normalize();
-						NodeList nList = doc.getElementsByTagName("journey");
-						for (int temp = 0; temp < nList.getLength(); temp++) {
-							Node nNode = nList.item(temp);
+
+						NodeList journyList = doc.getElementsByTagName("journey");
+
+						// ------------------------------------------------------------
+
+						for (int temp = 0; temp < journyList.getLength(); temp++) {
+							System.out.println("journy loop");
+							Node nNode = journyList.item(temp);
 							Element eElement = (Element) nNode;
 							NodeList siteList = eElement.getElementsByTagName("site");
 							for (int j = 0; j < siteList.getLength(); j++) {
