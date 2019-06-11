@@ -49,28 +49,45 @@ public class TripReadService {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			if (files.length > 0) {
 				for (File file : files) {
-					if (file.length() != 0) {
-						Document doc = dBuilder.parse(file);
-						doc.getDocumentElement().normalize();
+					// System.out.println("FileName: " + file.getName());
+					Document doc = null;
+					try {
 
-						NodeList journyList = doc.getElementsByTagName("journey");
+						if (file.length() != 0) {
 
-						// ------------------------------------------------------------
+							doc = dBuilder.parse(file);
 
-						for (int temp = 0; temp < journyList.getLength(); temp++) {
-							System.out.println("journy loop");
-							Node nNode = journyList.item(temp);
-							Element eElement = (Element) nNode;
-							NodeList siteList = eElement.getElementsByTagName("site");
-							for (int j = 0; j < siteList.getLength(); j++) {
-								Node siteNode = siteList.item(j);
-								Element siteElement = (Element) siteNode;
-								sitelist.add(setValueToPojo(eElement, siteElement, siteInformation, fileType));
-								routeId = siteInformation.getRouteId();
-								siteInformation = new SiteInformation();
+							doc.getDocumentElement().normalize();
+
+							NodeList journyList = doc.getElementsByTagName("journey");
+
+							// ------------------------------------------------------------
+
+							for (int temp = 0; temp < journyList.getLength(); temp++) {
+								System.out.println("journy loop");
+								Node nNode = journyList.item(temp);
+								Element eElement = (Element) nNode;
+								NodeList siteList = eElement.getElementsByTagName("site");
+								for (int j = 0; j < siteList.getLength(); j++) {
+
+									System.out.println("Site->" + j);
+									Node siteNode = siteList.item(j);
+									Element siteElement = (Element) siteNode;
+
+									sitelist.add(setValueToPojo(eElement, siteElement, siteInformation, fileType));
+									routeId = siteInformation.getRouteId();
+									// System.out.println("routeId=>" +
+									// routeId);
+									siteInformation = new SiteInformation();
+								}
 							}
+							trackingDao.addSiteInfo(sitelist, routeId, fileType);
+							sitelist = new ArrayList<>();
+							routeId = null;
 						}
-						trackingDao.addSiteInfo(sitelist, routeId, fileType);
+					} catch (Exception ex) {
+						System.out.println("Error FileName: " + file.getName());
+						ex.printStackTrace();
 					}
 				}
 			}

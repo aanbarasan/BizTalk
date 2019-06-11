@@ -17,6 +17,8 @@ public class IntervalJob implements Job {
 	@Value("${processed.folder.path}")
 	private String processedDirPath;
 
+	private String UnprocessedDirPath;
+
 	@Autowired
 	TripReadService tripReadObj;
 
@@ -35,6 +37,8 @@ public class IntervalJob implements Job {
 		}
 
 		tripReadObj.readFiles(processedDirPath, "process");
+		tripReadObj.readFiles(UnprocessedDirPath, "unprocess");
+
 	}
 
 }
